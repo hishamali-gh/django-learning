@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Core | {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ greeting }}</h1>
+
+    <p>Logged-in as: <strong>{{ user_name|upper }}</strong></p>
+
+    <h3>Active Services:</h3>
+
+    {% if not services %}
+        <p>No service active</p>
+    {% endif %}
+
+    <ul>
+        {% for service in services %}
+            <li>{{ service }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Explore Users:</h3>
+
+    <ul>
+        <li><a href="{% url 'profile' username='hisham' %}" style="color: #38bdf8;">Hisham's Profile</a></li>
+
+        <li><a href="{% url 'profile' username='guest' %}" style="color: #38bdf8;">Guest's Profile</a></li>
+    </ul>
+{% endblock %}

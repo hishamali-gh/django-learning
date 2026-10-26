@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block content %}
+    <h1>User Profile: {{ username }}</h1>
+    <p>Role: <strong>{{ user_role }}</strong></p>
+
+    <hr>
+
+    <a href="{% url 'greet' %}" style="color: #38bdf8;">&larr; Back to Dashboard</a>
+{% endblock %}
