@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Protected Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ request.user.username }}!</h1>
+
+    <p>Your account is active. Session is securely authenticated.</p>
+
+    <div style="margin-top: 20px;">
+        <a href="{% url 'logout' %}" style="display: inline-block; padding: 8px 16px; background: #ef4444; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">Sign Out</a>
+    </div>
+{% endblock %}

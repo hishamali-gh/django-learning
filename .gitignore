@@ -1,0 +1,34 @@
+# Environment Variables and Secrets
+.env
+*.env
+.env.*
+!.env.example
+
+# Binaries and Executables (e.g. traefik.exe)
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python Caches and Compiled Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Local Databases and Logs
+*.sqlite3
+*.db
+*.log
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo

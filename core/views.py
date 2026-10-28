@@ -1,25 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from django.http import HttpResponse
-
-def welcome(request):
-    return HttpResponse('<h1>Welcome to Django!</h1>')
+from django.http import HttpResponse, HttpRequest
+from django.contrib.auth import authenticate, login, logout
 
 def greet(request):
-    context = {
-        'page_title': 'Dashboard',
-        'greeting': 'Welcome to the Django Template Engine!',
-        'user_name': 'hisham',
-        'services': ['Nginx Reverse Proxy', 'Django WSGI Engine', 'PostgreSQL DB'],
-    }
+    return HttpResponse('<h1>Welcome to Django!</h1>')
 
-    return render(request, 'core/index.html', context)
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-def user_profile(request, username):
-    context = {
-        'page_title': f"{username.capitalize()}'s Profile",
-        'username': username,
-        'user_role': 'Administrator' if username.lower() == 'hisham' else 'Standard Member',
-    }
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
 
-    return render(request, 'core/profile.html', context)
+        if not user:
+            err_msg = 'Invalid username or password! Please try again.'
+
+            return render(request, 'core/login.html', {'error': err_msg})
+
+        login(request, user)
+
+        return redirect('dashboard')
+
+    return render(request, 'core/login.html')
+
+def logout_view(request):
+    logout(request)
+
+    return redirect('login')
+
+def dashboard_view(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    return render(request, 'core/dashboard.html')
