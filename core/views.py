@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.contrib.auth import authenticate, login, logout
 
-def greet(request):
-    return HttpResponse('<h1>Welcome to Django!</h1>')
+def home(request):
+    return render(request, 'core/home.html')
 
 def login_view(request):
     if request.method == 'POST':
